@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
-import config
+from config import ParserConfig
 
 
 class Parser:
     def _get_html(self, url):
-        html = requests.get(url, headers=config.Parser.HEADERS)
+        html = requests.get(url, headers=ParserConfig.HEADERS)
         if self._server_is_respond(html):
             return html
         else:
@@ -15,7 +15,7 @@ class Parser:
         if self._url_for_file(text):
             return text  # nothing to change, url is for file (full url)
         else:
-            return config.Parser.HOST + text  # adding HOSTNAME
+            return ParserConfig.HOST + text  # adding HOSTNAME
 
     @staticmethod
     def _server_is_respond(html):
@@ -25,7 +25,7 @@ class Parser:
     def _url_for_file(url):
         return True if 'https://' in url else False  # directories url not contains https:// (starts with /webapps)
 
-    def get_content(self, url, params=''):
+    def get_content(self, url):
         try:
             soup = BeautifulSoup(self._get_html(url).text, 'html.parser')
         except ConnectionError:
@@ -41,7 +41,14 @@ class Parser:
                 {
                     'name': line.find('a').get_text(strip=True),
                     'link': self._create_url(line.find('a').get('href')),
-                    'type': 'file' if self._url_for_file(line.find('a').get('href')) else 'directory'
+                    'format': self._define_format(line.find('a').get_text(strip=True))
                 }
             )
         return lines_list
+
+    @staticmethod
+    def _define_format(name) -> str:
+        for format in ParserConfig.FILE_FORMATS:
+            if format in name:
+                return format
+        return 'directory'
