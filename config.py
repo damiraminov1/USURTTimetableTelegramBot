@@ -2,7 +2,7 @@ import os.path
 from pathlib import Path
 from dotenv import load_dotenv
 
-basedir = os.path.abspath(os.path.dirname(__name__))
+basedir = Path(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(basedir, '.env'))
 
 
@@ -23,4 +23,4 @@ class ParserConfig(object):
 
 
 class SaveConfig(object):
-    SAVE_PATH = Path(os.path.dirname(os.path.abspath(__file__))).joinpath('app/temp')
+    SAVE_PATH = basedir.joinpath('app/temp')
