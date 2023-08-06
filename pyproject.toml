@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "usurt timeable telegram bot"
+version = "1.0.0"
+description = "USURT timetable telegram bot"
+authors = ["damiraminov1 <damiraminov1@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "^1.0.0"
+beautifulsoup4 = "^4.12.2"
+pyshorteners = "^1.0.1"
+aiogram = "^2.25.1"
+aiohttp = "^3.8.5"
+
+
+[tool.poetry.group.development.dependencies]
+black = "^23.7.0"
+flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

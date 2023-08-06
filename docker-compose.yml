@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    restart: on-failure
+    container_name: "usurt_timetable_telegram_bot"
+    command: python run.py
+    volumes:
+      - .:/usurt_timetable_telegram_bot
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
