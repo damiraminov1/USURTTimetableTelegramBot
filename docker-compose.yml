@@ -3,10 +3,23 @@ version: "3"
 services:
   server:
     build: .
-    restart: on-failure
     container_name: "usurt_timetable_telegram_bot"
     command: python run.py
+    restart: on-failure
+    env_file: .env
+    environment:
+      - TELEGRAM_BOT_TOKEN
+      - REDIS_HOST
     volumes:
       - .:/usurt_timetable_telegram_bot
+  redis:
+    image: redis
+    restart: on-failure
+    container_name: 'redis'
+    command: redis-server
+    env_file: .env
     environment:
-      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_BOT_TOKEN
+      - REDIS_HOST
+    ports:
+      - '6379:6379'

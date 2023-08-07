@@ -12,6 +12,7 @@ beautifulsoup4 = "^4.12.2"
 pyshorteners = "^1.0.1"
 aiogram = "^2.25.1"
 aiohttp = "^3.8.5"
+redis = "^4.6.0"
 
 
 [tool.poetry.group.development.dependencies]

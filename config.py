@@ -22,3 +22,7 @@ class ParserConfig(object):
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
     }
     FILE_FORMATS = [".doc", ".docx", ".xls", ".xlsx", ".pdf", ".jpg", ".png", ".jpeg"]
+
+
+class RedisConfig:
+    REDIS_HOST = os.environ.get("REDIS_HOST")
